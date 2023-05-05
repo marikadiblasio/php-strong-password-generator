@@ -3,7 +3,6 @@ session_start();
 
 if(!$_SESSION["newPsw"]){
     header('Location: ../index.php');
-    echo 'cosa';
 }
 ?>
 <!DOCTYPE html>
