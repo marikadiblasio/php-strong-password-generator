@@ -1,21 +1,8 @@
-<?php 
-    $pswChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!£$%&?#()+*.=/@[]{}:;';
-    function generatePsw($choice){
-        if(!empty($_GET['pswLength'])){
-            $pswLength = $_GET['pswLength'];
-            $newPsw = '';
-            while (strlen($newPsw) <= $pswLength){
-                $pswIndex = rand(8, strlen($choice) - 1);
-                $pswChar = $choice[$pswIndex];
-                if (!str_contains($newPsw, $pswChar)){  
-                    $newPsw .= $pswChar;
-                }
-            }
-            return $newPsw;
-        }
-        
-    }
-    $newPsw = generatePsw($pswChars);
+
+<?php include __DIR__ .'/partials/data/functions.php';
+
+$newPsw = generatePsw($pswChars);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,19 +26,15 @@
             <form action="<?php echo $_SERVER['PHP_SELF']?>" class="d-flex align-items-center justify-content-center">
                 <label class="me-3" for="pswLength">Scegli la lunghezza della password</label>
                 <input class="form-control w-25 me-3" type="number" name="pswLength" id="pswLength" min="8" max="32" placeholder="Scegli un numero da 8 a 32">
-                <!-- <select class="form-control w-25 me-3" name="pswLength" id="pswLength">
-                    <option value="">Scegli un numero da 8 a 32</option>
-                    <?php for($i = 8; $i <= 32; $i++){ ?> 
-                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                    <?php } ?>
-                </select> -->
                 <button class="btn btn-success" type="submit">Genera password</button>
             </form>
+            <?php if($newPsw) { ?>
             <div>
                 <span>
                     La password generata è: <?php echo " $newPsw" ?>
                 </span>
             </div>
+            <?php } ?>
         </div>
     </main>
 </body>
