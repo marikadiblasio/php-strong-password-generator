@@ -1,8 +1,9 @@
+<?php 
+session_start();
 
-<?php include __DIR__ .'/partials/data/functions.php';
+include __DIR__ .'/partials/data/functions.php';
 
-$newPsw = generatePsw($pswChars);
-
+$_SESSION["newPsw"] = generatePsw($pswChars);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,19 +21,14 @@ $newPsw = generatePsw($pswChars);
     </header>
     <main>
         <div class="container">
-        <!-- Milestone 1
-        Creare un form che invii in GET la lunghezza della password. Una nostra funzione utilizzerà questo dato per generare una password casuale (composta da lettere, lettere maiuscole, numeri e simboli) da restituire all’utente.
-        Scriviamo tutto (logica e layout) in un unico file index.php -->
-            <form action="<?php echo $_SERVER['PHP_SELF']?>" class="d-flex align-items-center justify-content-center">
+            <form action="<?php echo $_SERVER['PHP_SELF']?>" class="d-flex align-items-center justify-content-center mb-3">
                 <label class="me-3" for="pswLength">Scegli la lunghezza della password</label>
                 <input class="form-control w-25 me-3" type="number" name="pswLength" id="pswLength" min="8" max="32" placeholder="Scegli un numero da 8 a 32">
                 <button class="btn btn-success" type="submit">Genera password</button>
             </form>
-            <?php if($newPsw) { ?>
-            <div>
-                <span>
-                    La password generata è: <?php echo " $newPsw" ?>
-                </span>
+            <?php if($_SESSION["newPsw"]) { ?>
+            <div class="text-center">
+                <a href="./pages/password.php" class="btn btn-success display-3">Vai alla nuova password</a>
             </div>
             <?php } ?>
         </div>
