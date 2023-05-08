@@ -5,7 +5,7 @@
             $pswLength = $_GET['pswLength'];
             $newPsw = '';
             while (strlen($newPsw) < $pswLength){
-                $pswIndex = rand(8, strlen($choice) - 1);
+                $pswIndex = rand(0, strlen($choice) - 1);
                 $pswChar = $choice[$pswIndex];
                 if (!str_contains($newPsw, $pswChar)){  
                     $newPsw .= $pswChar;
